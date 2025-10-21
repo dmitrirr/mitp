@@ -48,7 +48,7 @@ class Store:
     def __init__(self):
         self.products = []
     
-    def add_product(self, product: Product):
+    def add_product(self, product: Product) -> None:
         self.products.append(product)
     
     def list_products(self) -> None:
