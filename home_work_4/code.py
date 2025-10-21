@@ -41,8 +41,8 @@ def find_book(title: str) -> Book | None:
             return book
     return None
 
-# borrows a book
 def is_book_borrow(book: Book) -> None:
+    """Borrows a book"""
     if not book.available:
         raise BookNotAvailable("book is not available")
 
