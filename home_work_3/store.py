@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self, name, price, stock):
+    def __init__(self, name: str, price: float, stock: int) -> None:
         if price < 0:
             raise ValueError("price cannot be negative")
 
@@ -10,7 +10,7 @@ class Product:
         self.price = price
         self.stock = stock
     
-    def update_stock(self, quantity):
+    def update_stock(self, quantity: int) -> None:
         if quantity < 0:
             raise ValueError("stock cannot be negative")
         
@@ -21,7 +21,7 @@ class Order:
     def __init__(self):
         self.products = {}
     
-    def add_product(self, product, quantity):
+    def add_product(self, product: Product, quantity: int) -> None:
         if quantity == 0:
             return
 
@@ -37,7 +37,7 @@ class Order:
         self.products[product] += quantity
         product.update_stock(product.stock - quantity)
     
-    def calculate_total(self):
+    def calculate_total(self) -> float:
         total = 0
         for product, quantity in self.products.items():
             total += product.price * quantity
@@ -48,12 +48,12 @@ class Store:
     def __init__(self):
         self.products = []
     
-    def add_product(self, product):
+    def add_product(self, product: Product):
         self.products.append(product)
     
-    def list_products(self):
+    def list_products(self) -> None:
         for product in self.products:
             print(f"{product.name}: {product.price} руб., в наличии: {product.stock} шт.")
     
-    def create_order(self):
+    def create_order(self) -> Order:
         return Order()
