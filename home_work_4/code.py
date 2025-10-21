@@ -60,14 +60,14 @@ class Library(BaseModel):
     def total_books(self) -> int:
         return len(self.books)
 
-library = Library(
-    books=[book1],
-    users=[User(
-        name="John Doe",
-        email="john.doe@example.com",
-        membership_id="1234567890",
-    )],
-)
+# library = Library(
+#     books=[book1],
+#     users=[User(
+#         name="John Doe",
+#         email="john.doe@example.com",
+#         membership_id="1234567890",
+#     )],
+# )
 
 # print("total books:", library.total_books())
 
