@@ -38,7 +38,7 @@ class Order:
         product.update_stock(product.stock - quantity)
     
     def calculate_total(self) -> float:
-        total = 0
+        total = 0.0
         for product, quantity in self.products.items():
             total += product.price * quantity
         return total
