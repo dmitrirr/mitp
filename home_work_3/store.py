@@ -1,12 +1,18 @@
 class Product:
     def __init__(self, name, price, stock):
+        if price < 0:
+            raise ValueError("price cannot be negative")
+
+        if stock < 0:
+            raise ValueError("stock cannot be negative")
+
         self.name = name
         self.price = price
         self.stock = stock
     
     def update_stock(self, quantity):
         if quantity < 0:
-            raise ValueError("Ошибка: количество не может быть отрицательным")
+            raise ValueError("stock cannot be negative")
         
         self.stock = quantity
 
@@ -16,8 +22,14 @@ class Order:
         self.products = {}
     
     def add_product(self, product, quantity):
+        if quantity == 0:
+            return
+
+        if quantity < 0:
+            raise ValueError("quantity cannot be negative")
+
         if product.stock < quantity:
-            raise ValueError("Ошибка: недостаточно товара на складе")
+            raise ValueError("insufficient stock")
         
         if product not in self.products:
             self.products[product] = 0
