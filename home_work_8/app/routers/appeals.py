@@ -15,5 +15,4 @@ async def create_appeal(
     service: Annotated[AppealsService, Depends(get_appeals_service)],
 ):
     appeal_data = service.create_appeal(appeal)
-    return {"message": "Appeal successfully saved", "appeal": appeal_data}
-
+    return appeal_data
