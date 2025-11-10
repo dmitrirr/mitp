@@ -1,32 +1,19 @@
-import json
-from pathlib import Path
+from typing import Annotated
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from ..dependencies import get_appeals_service
 from ..models.appeals import AppealRequest
+from ..service.appeals import AppealsService
 
 router = APIRouter()
 
 
 @router.post("/appeals/", tags=["appeals"])
-async def create_appeal(appeal: AppealRequest):
-    data_dir = Path("data")
-    data_dir.mkdir(exist_ok=True)
-
-    appeal_data = appeal.model_dump()
-    appeal_data["date_of_birth"] = appeal_data["date_of_birth"].isoformat()
-
-    file_path = data_dir / "appeals.json"
-
-    appeals = []
-    if file_path.exists():
-        with open(file_path, "r", encoding="utf-8") as f:
-            appeals = json.load(f)
-
-    appeals.append(appeal_data)
-
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(appeals, f, ensure_ascii=False, indent=2)
-
+async def create_appeal(
+    appeal: AppealRequest,
+    service: Annotated[AppealsService, Depends(get_appeals_service)],
+):
+    appeal_data = service.create_appeal(appeal)
     return {"message": "Appeal successfully saved", "appeal": appeal_data}
 
