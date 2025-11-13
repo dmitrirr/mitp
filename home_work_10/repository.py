@@ -2,7 +2,7 @@ import csv
 from pathlib import Path
 from typing import List
 
-from sqlalchemy import func, select
+from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
 from models import StudentGrade
@@ -81,3 +81,10 @@ class StudentRepository:
         
         self.session.commit()
         return student
+
+    def delete_by_id(self, id: int) -> None:
+        stmt = delete(StudentGrade).where(StudentGrade.id == id)
+        result = self.session.execute(stmt)
+        self.session.commit()
+        if result.rowcount == 0:
+            raise ValueError(f"Student with id {id} not found")
