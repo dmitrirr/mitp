@@ -27,6 +27,17 @@ async def get_students(
     return service.get_students()
 
 
+@router.get("/students/{id}", response_model=StudentResponse)
+async def get_student(
+    id: int,
+    service: Annotated[StudentsService, Depends(get_students_service)],
+):
+    try:
+        return service.get_student_by_id(id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
 @router.put("/students/{id}", response_model=StudentResponse)
 async def update_student(
     id: int,

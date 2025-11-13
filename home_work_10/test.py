@@ -67,6 +67,17 @@ def test_crud_flow(client):
         }
     ]
 
+    response = client.get(f"/students/{student_id}")
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": student_id,
+        "last_name": "Ivanov",
+        "first_name": "Ivan",
+        "faculty": "АВТФ",
+        "course": "Мат. Анализ",
+        "grade": 85,
+    }
+
     update_data = {
         "last_name": "Petrov",
         "grade": 90,

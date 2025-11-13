@@ -20,6 +20,12 @@ class StudentRepository:
         stmt = select(StudentGrade)
         return list(self.session.scalars(stmt).all())
 
+    def select_by_id(self, id: int) -> StudentGrade:
+        student = self.session.get(StudentGrade, id)
+        if student is None:
+            raise ValueError(f"Student with id {id} not found")
+        return student
+
     def select_by_faculty(self, faculty: str) -> List[StudentGrade]:
         stmt = select(StudentGrade).where(StudentGrade.faculty == faculty)
         return list(self.session.scalars(stmt).all())

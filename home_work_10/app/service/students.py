@@ -24,6 +24,10 @@ class StudentsService:
         students = self.repository.select()
         return [StudentResponse.model_validate(s) for s in students]
 
+    def get_student_by_id(self, id: int) -> StudentResponse:
+        student = self.repository.select_by_id(id)
+        return StudentResponse.model_validate(student)
+
     def update_student(self, id: int, student: StudentUpdate) -> StudentResponse:
         updated = self.repository.update_by_id(
             id=id,
