@@ -1,8 +1,8 @@
 from typing import List
 
 from ..models.students import StudentCreate, StudentResponse, StudentUpdate
-from repository import StudentRepository
-from models import StudentGrade
+from app.repository.students import StudentRepository
+from app.db.models import StudentGrade
 
 
 class StudentsService:

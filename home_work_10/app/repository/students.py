@@ -5,7 +5,7 @@ from typing import List
 from sqlalchemy import delete, func, select
 from sqlalchemy.orm import Session
 
-from models import StudentGrade
+from app.db.models import StudentGrade
 
 
 class StudentRepository:

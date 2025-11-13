@@ -5,7 +5,7 @@ import pytest
 from sqlalchemy import create_engine, delete
 from sqlalchemy.orm import sessionmaker
 
-from models import Base, StudentGrade
+from app.db.models import Base, StudentGrade
 
 BASE_URL = "http://localhost:8000"
 DB_PATH = Path(__file__).parent / "students.db"

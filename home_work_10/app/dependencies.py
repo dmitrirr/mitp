@@ -3,7 +3,7 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from repository import StudentRepository
+from app.repository.students import StudentRepository
 from app.service.students import StudentsService
 
 _db_path = Path(__file__).parent.parent / "students.db"

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from .dependencies import _engine
 from .routers.students import router
-from models import Base
+from app.db.models import Base
 
 app = FastAPI()
 
